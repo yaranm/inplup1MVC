@@ -8,7 +8,11 @@ namespace inplup1MVC.ViewModels
 {
     public class ProductCategoryNewViewModel
     {
+        [Required]
         [MaxLength(50)]
         public string Namn { get; set; }
+
+        [Required]
+        public string Comment { get; set; }
     }
 }

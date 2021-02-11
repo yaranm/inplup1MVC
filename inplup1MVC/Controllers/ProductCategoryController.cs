@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace inplup1MVC.Controllers
 {
@@ -35,23 +36,44 @@ namespace inplup1MVC.Controllers
 
             return View(viewModel);
         }
-        [Authorize(Roles = "PlayerAdmin,Admin")]
+
+        [Authorize(Roles = "Admin, ProductManager")]
         public IActionResult Edit(int Id)
         {
             var viewModel = new ProductCategoryEditViewModel();
 
             var dbPc = _dbContext.ProductCategories.First(r => r.Id == Id);
 
-            viewModel.Id = dbPc.Id;
+            //viewModel.Id = dbPc.Id; ???????????????????????????????????????????????
             
             viewModel.Namn = dbPc.Namn;
-            
-
-            
+           
 
             return View(viewModel);
         }
 
+        [Authorize(Roles = "Admin, ProductManager")]
+        [HttpPost]
+        public IActionResult Edit(int Id, ProductCategoryEditViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var dbPc = _dbContext.ProductCategories.First(r => r.Id == Id);
+
+                dbPc.Id = viewModel.Id;
+
+                dbPc.Namn = viewModel.Namn;
+                
+                _dbContext.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            
+            return View(viewModel);
+        }
+
+        [Authorize(Roles = "Admin, ProductManager")]
         public IActionResult New()
         {
             var viewModel = new ProductCategoryNewViewModel();
@@ -59,11 +81,15 @@ namespace inplup1MVC.Controllers
 
             return View(viewModel);
         }
-
+        [Authorize(Roles = "Admin, ProductManager")]
         [HttpPost]
-
         public IActionResult New(ProductCategoryNewViewModel viewModel)
         {
+            bool Finns = _dbContext.ProductCategories.Any(r => r.Namn == viewModel.Namn);
+
+            if (Finns)
+                ModelState.AddModelError("Name", "Namnet är tyvärr upptaget");
+
             if (ModelState.IsValid)
             {
                 var dbVaccin = new ProductCategory();
@@ -78,7 +104,5 @@ namespace inplup1MVC.Controllers
             
             return View(viewModel);
         }
-
-
     }
 }

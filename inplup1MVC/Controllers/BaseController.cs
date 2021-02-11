@@ -1,5 +1,6 @@
 ﻿using inplup1MVC.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,12 @@ namespace inplup1MVC.Controllers
         public BaseController(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
+        }
+        public override void OnActionExecuting(ActionExecutingContext context)
+        {
+          
+
+            base.OnActionExecuting(context);
         }
     }
 }

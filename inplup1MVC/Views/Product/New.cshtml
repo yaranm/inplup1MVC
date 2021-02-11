@@ -1,26 +1,35 @@
-﻿@model inplup1MVC.ViewModels.ProductCategoryNewViewModel
+﻿@model inplup1MVC.ViewModels.ProductNewViewModel
 
-
-@{
-    ViewData["Title"] = "Ny produktkategori";
+@{ 
+    ViewData["Title"] = "Ny Produkt";
 }
-
-
 
 <section class="py-5">
     <div class="row">
         <div class="col-lg-12 mb-5">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="h6 text-uppercase mb-0">Ny Prduktkategori</h3>
+                    <h3 class="h6 text-uppercase mb-0">New Product</h3>
                 </div>
 
                 <div class="card-body">
-                    <form asp-controller="ProductCategory" asp-action="New" method="post">
+                    <form asp-controller="Product" asp-action="New" method="post">
                         <div class="form-group">
                             <label asp-for="Namn">Namn</label>
                             <input class="form-control" asp-for="Namn">
                         </div>
+                        <div class="form-group">
+                            <label asp-for="Price">Pris</label>
+                            <input class="form-control" asp-for="Price">
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="SelectedCategorieId">Kategorier</label>
+                            <select class="form-control"
+                                    asp-for="SelectedCategorieId"
+                                    asp-items="Model.AllCategory"></select>
+                            <span asp-validation-for="SelectedCategorieId" class="field-validation-error"></span>
+                        </div>
+
 
                         <div class="form-group">
                             <label asp-for="Comment">Comment</label>
@@ -39,6 +48,3 @@
         </div>
     </div>
 </section>
-
-
-

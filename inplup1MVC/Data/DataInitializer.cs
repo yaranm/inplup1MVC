@@ -10,54 +10,23 @@ namespace inplup1MVC.Data
         public static void SeedData(ApplicationDbContext dbContext, UserManager<IdentityUser> userManager)
         {
             dbContext.Database.Migrate();
-            
             SeedProductCategory(dbContext);
             SeedRoles(dbContext);
-
+            SeedProducts(dbContext);
             SeedUsers(userManager);
 
         }
 
-       
-
-        private static void SeedProductCategory(ApplicationDbContext dbContext)
-        {
-            var productCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Kablar");
-            if (productCategory == null)
-                dbContext.ProductCategories.Add(new ProductCategory { Namn = "Kablar" });
-
-            productCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Datorer");
-            if(productCategory == null)
-                dbContext.ProductCategories.Add(new ProductCategory { Namn = "Datorer" });
-            
-            productCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Skärmar");
-            if (productCategory == null)
-                dbContext.ProductCategories.Add(new ProductCategory { Namn = "Skärmar" });
-
-            productCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Möss");
-            if (productCategory == null)
-                dbContext.ProductCategories.Add(new ProductCategory { Namn = "Möss" });
-
-            productCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Laddare");
-            if (productCategory == null)
-                dbContext.ProductCategories.Add(new ProductCategory { Namn = "Laddare" });
-
-            dbContext.SaveChanges();
-        }
 
         private static void SeedUsers(UserManager<IdentityUser> userManager)
         {
             AddUserIfNotExists(userManager, "stefan@superduper.se",
-                "Hejsan123#", new[] { "Admin" });
+                "Hejsan123#", new[] {"Admin"});
 
             AddUserIfNotExists(userManager, "kalle@superduper.se",
-                "Hejsan123#", new[] { "PlayerAdmin" });
+                "Hejsan123#", new[] { "ProductManager" });
 
-            AddUserIfNotExists(userManager, "lisa@superduper.se",
-                "Hejsan123#", new[] { "RefAdmin" });
-
-            AddUserIfNotExists(userManager, "maja@superduper.se",
-                "Hejsan123#", new[] { "RefAdmin", "PlayerAdmin" });
+            
 
         }
 
@@ -81,14 +50,114 @@ namespace inplup1MVC.Data
             var role = dbContext.Roles.FirstOrDefault(r => r.Name == "Admin");
             if (role == null)
                 dbContext.Roles.Add(new IdentityRole { Name = "Admin", NormalizedName = "Admin" });
-            role = dbContext.Roles.FirstOrDefault(r => r.Name == "PlayerAdmin");
+            role = dbContext.Roles.FirstOrDefault(r => r.Name == "ProductManager");
             if (role == null)
-                dbContext.Roles.Add(new IdentityRole { Name = "PlayerAdmin", NormalizedName = "PlayerAdmin" });
-            role = dbContext.Roles.FirstOrDefault(r => r.Name == "RefAdmin");
-            if (role == null)
-                dbContext.Roles.Add(new IdentityRole { Name = "RefAdmin", NormalizedName = "RefAdmin" });
+                dbContext.Roles.Add(new IdentityRole { Name = "ProductManager", NormalizedName = "ProductManager" });
 
             dbContext.SaveChanges();
+        }
+
+        private static void SeedProductCategory(ApplicationDbContext dbContext)
+        {
+            var productCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Kablar");
+            if (productCategory == null)
+                dbContext.ProductCategories.Add(new ProductCategory { Namn = "Kablar" });
+
+            productCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Datorer");
+            if (productCategory == null)
+                dbContext.ProductCategories.Add(new ProductCategory { Namn = "Datorer" });
+
+            productCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Skärmar");
+            if (productCategory == null)
+                dbContext.ProductCategories.Add(new ProductCategory { Namn = "Skärmar" });
+
+            productCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Möss");
+            if (productCategory == null)
+                dbContext.ProductCategories.Add(new ProductCategory { Namn = "Möss" });
+
+            productCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Laddare");
+            if (productCategory == null)
+                dbContext.ProductCategories.Add(new ProductCategory { Namn = "Laddare" });
+
+            dbContext.SaveChanges();
+        }
+
+        private static void SeedProducts(ApplicationDbContext dbContext)
+        {
+            var product = dbContext.Produkter.FirstOrDefault(r => r.Name == "USB-C 2M");
+            if (product == null)
+                dbContext.Produkter.Add(new Product
+                {
+                    Name = "USB-C 2M",
+                    Description = "USB-C i båda ändarna 2 meter ",
+                    Price = 400,
+                    ProductCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Kablar")
+
+                });
+            else
+            {
+                product.ProductCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Kablar");
+            }
+
+            product = dbContext.Produkter.FirstOrDefault(r => r.Name == "Huawei MateBook 13");
+            if (product == null)
+                dbContext.Produkter.Add(new Product
+                {
+                    Name = "Huawei MateBook 13",
+                    Description = "Enkelhet med en smula förträfflighet. Huawei MateBook 13 levererar inte bara solid prestanda utan är även otroligt snygg med sitt premiumchassi i aluminium. Den kraftfulla Intel Core i5-processorn och 8GB LPPD3 RAM ger en smidigt användarupplevelse.",
+                    Price = 11900,
+                    ProductCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Datorer")
+
+                });
+            else
+            {
+                product.ProductCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Datorer");
+            }
+
+            product = dbContext.Produkter.FirstOrDefault(r => r.Name == "Lenovo 23 tum");
+            if (product == null)
+                dbContext.Produkter.Add(new Product
+                {
+                    Name = "Lenovo 23 tum",
+                    Description = "Full HD, HDMI, USB-C",
+                    Price = 3200,
+                    ProductCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Skärmar")
+                });
+            else
+            {
+                product.ProductCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Skärmar");
+            }
+
+            product = dbContext.Produkter.FirstOrDefault(r => r.Name == "Trådlös spelmus");
+            if (product == null)
+                dbContext.Produkter.Add(new Product
+                {
+                    Name = "Trådlös spelmus",
+                    Description = "Denna mus har ett ergonimiskt handgrepp för dig som spelar mycket.",
+                    Price = 1400,
+                    ProductCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Möss")
+                });
+            else
+            {
+                product.ProductCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Möss");
+            }
+
+            product = dbContext.Produkter.FirstOrDefault(r => r.Name == "Laddare till Iphone");
+            if (product == null)
+                dbContext.Produkter.Add(new Product
+                {
+                    Name = "Iphone laddare",
+                    Description = "Passar serie 6, 7, 8, 11",
+                    Price = 250,
+                    ProductCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Laddare")
+                });
+            else
+            {
+                product.ProductCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Laddare");
+            }
+
+            dbContext.SaveChanges();
+
         }
 
     }

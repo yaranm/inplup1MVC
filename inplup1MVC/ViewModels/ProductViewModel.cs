@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace inplup1MVC.ViewModels
 {
-    public class ProductCategoryEditViewModel
+    public class ProductViewModel
     {
         public int Id { get; set; }
-       
-        [Required]
-        [MaxLength(50)]
         public string Namn { get; set; }
+        public string ProductCategory { get; set; }
+        public int Pris { get; set; }
     }
 }

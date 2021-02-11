@@ -39,12 +39,13 @@
                     <tbody>
                         @foreach (var productCategory in Model.ProductCategories)
                         {
-                            <tr>
-                                <td>@productCategory.Name</td>
-                                <td>@productCategory.Id</td>
-                                <td><a asp-controller="ProductCategory" asp-action="Edit" asp-route-Id="@productCategory.Id" class="btn btn-secondary active" role="button" aria-pressed="true">Edit</a></td>
+                        <tr>
+                            <td>@productCategory.Name</td>
+                            <td>@productCategory.Id</td>
+                            <td><a asp-controller="ProductCategory" asp-action="Edit" asp-route-Id="@productCategory.Id" class="btn btn-secondary active" role="button" aria-pressed="true">Edit</a></td>
+                            
 
-                            </tr>
+                        </tr>
                         }
 
                     </tbody>

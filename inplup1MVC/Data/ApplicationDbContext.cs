@@ -13,6 +13,7 @@ namespace inplup1MVC.Data
         {
         }
 
+        public DbSet<Product> Produkter { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
         
     }
