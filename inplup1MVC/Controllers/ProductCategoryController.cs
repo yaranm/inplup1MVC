@@ -28,10 +28,10 @@ namespace inplup1MVC.Controllers
 
             viewModel.ProductCategories = _dbContext.ProductCategories
     .Where(r => q == null || r.Namn.Contains(q))
-    .Select(dbVacc => new ProductCategoryViewModel
+    .Select(_dbContext => new ProductCategoryViewModel
     {
-        Id = dbVacc.Id,
-        Name = dbVacc.Namn
+        Id = _dbContext.Id,
+        Name = _dbContext.Namn
     }).ToList();
 
             return View(viewModel);

@@ -10,8 +10,8 @@ using inplup1MVC.Data;
 namespace inplup1MVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210211113434_InitialCreate1")]
-    partial class InitialCreate1
+    [Migration("20210212134010_addprod")]
+    partial class addprod
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

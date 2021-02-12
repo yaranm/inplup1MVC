@@ -12,7 +12,7 @@ namespace inplup1MVC.ViewModels
 
         public int Id { get; set; }
 
-        public bool IsActive { get; set; }
+        
 
         public int SelectedProductCategoryId { get; set; }
         public List<SelectListItem> AllProductCategory { get; set; } = new List<SelectListItem>();

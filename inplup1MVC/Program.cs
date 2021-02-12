@@ -20,17 +20,13 @@ namespace inplup1MVC
             var host = CreateHostBuilder(args).Build();
             using (var scope = host.Services.CreateScope())
             {
-                var serviceProvider = scope.ServiceProvider;
-                try
-                {
+                
+                
+                    var serviceProvider = scope.ServiceProvider;    
                     var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
                     var dbContext = serviceProvider.GetRequiredService<ApplicationDbContext>();
                     DataInitializer.SeedData(dbContext, userManager);
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex.Message);
-                }
+               
             }
 
             host.Run();

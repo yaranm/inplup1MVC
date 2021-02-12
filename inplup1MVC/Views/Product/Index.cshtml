@@ -44,18 +44,21 @@
                                 <th scope="col">Namn</th>
                                 <th scope="col">Kategori</th>
                                 <th scope="col">Pris</th>
+                                <th scope="col">Beskriving</th>
+
 
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var produkt in Model.Produkter)
                             {
-                                <tr>
-                                    <td>@produkt.Namn</td>
-                                    <td>@produkt.ProductCategory</td>
-                                    <td>@produkt.Pris</td>
-                                    <td><a asp-controller="Product" asp-action="Edit" asp-route-Id="@produkt.Id" class="btn btn-secondary active" role="button" aria-pressed="true">Edit</a></td>
-                                </tr>
+                            <tr>
+                                <td>@produkt.Namn</td>
+                                <td>@produkt.ProductCategory</td>
+                                <td>@produkt.Pris</td>
+                                <td>@produkt.Description</td>
+                                <td><a asp-controller="Product" asp-action="Edit" asp-route-Id="@produkt.Id" class="btn btn-secondary active" role="button" aria-pressed="true">Edit</a></td>
+                            </tr>
 }
 
                         </tbody>

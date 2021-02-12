@@ -50,6 +50,7 @@ namespace inplup1MVC.Controllers
                     Id = dbProd.Id,
                     Namn = dbProd.Name,
                     Pris = dbProd.Price,
+                    Description = dbProd.Description,
                     ProductCategory = dbProd.ProductCategory.Namn
 
 
@@ -98,11 +99,11 @@ namespace inplup1MVC.Controllers
             viewModel.SelectedProductCategoryId = dbProduct.ProductCategory.Id;
             viewModel.AllProductCategory = GetCategorySelectListItems();
             viewModel.Namn = dbProduct.Name;
-            dbProduct.Price = viewModel.Pris;
+            viewModel.Pris = dbProduct.Price;
             viewModel.Comment = dbProduct.Description;
 
             viewModel.AllProductCategory = GetCategorySelectListItems();
-            viewModel.IsActive = true;
+            
 
             return View(viewModel);
         }
@@ -142,10 +143,11 @@ namespace inplup1MVC.Controllers
         List<SelectListItem> GetCategorySelectListItems()
         {
             var list = new List<SelectListItem>();
-            list.Add(new SelectListItem("Kablar", "4"));
+            list.Add(new SelectListItem("Laddare", "5"));
+            list.Add(new SelectListItem("Möss", "4"));
             list.Add(new SelectListItem("Skärmar", "3"));
-            list.Add(new SelectListItem("Laddare", "2"));
-            list.Add(new SelectListItem("Dator & tillbehör", "1"));
+            list.Add(new SelectListItem("Datorer", "2"));
+            list.Add(new SelectListItem("Kablar", "1"));
             return list;
         }
     }

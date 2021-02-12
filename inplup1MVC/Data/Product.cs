@@ -17,7 +17,7 @@ namespace inplup1MVC.Data
         [MaxLength(100)]
         public string Description { get; set; }
         public int Price { get; set; }
-        public int CategorieId { get; set; }
+       
        
         
     }

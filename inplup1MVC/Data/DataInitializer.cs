@@ -10,10 +10,12 @@ namespace inplup1MVC.Data
         public static void SeedData(ApplicationDbContext dbContext, UserManager<IdentityUser> userManager)
         {
             dbContext.Database.Migrate();
-            SeedProductCategory(dbContext);
-            SeedRoles(dbContext);
-            SeedProducts(dbContext);
             SeedUsers(userManager);
+            SeedRoles(dbContext);
+            SeedProductCategory(dbContext);
+            SeedProducts(dbContext);
+           
+
 
         }
 
@@ -84,10 +86,28 @@ namespace inplup1MVC.Data
 
         private static void SeedProducts(ApplicationDbContext dbContext)
         {
-            var product = dbContext.Produkter.FirstOrDefault(r => r.Name == "USB-C 2M");
+            var product = dbContext.Produkter.FirstOrDefault(r => r.Name == "Huawei MateBook 13");
             if (product == null)
                 dbContext.Produkter.Add(new Product
                 {
+                    
+                    Name = "Huawei MateBook 13",
+                    Description = "En stark och kraftfull dator för dig som programerar",
+                    Price = 11900,
+                    ProductCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Datorer")
+
+
+                });
+            else
+            {
+                product.ProductCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Datorer");
+            }
+
+            product = dbContext.Produkter.FirstOrDefault(r => r.Name == "USB-C 2M");
+            if (product == null)
+                dbContext.Produkter.Add(new Product
+                {
+                    
                     Name = "USB-C 2M",
                     Description = "USB-C i båda ändarna 2 meter ",
                     Price = 400,
@@ -97,21 +117,7 @@ namespace inplup1MVC.Data
             else
             {
                 product.ProductCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Kablar");
-            }
 
-            product = dbContext.Produkter.FirstOrDefault(r => r.Name == "Huawei MateBook 13");
-            if (product == null)
-                dbContext.Produkter.Add(new Product
-                {
-                    Name = "Huawei MateBook 13",
-                    Description = "Enkelhet med en smula förträfflighet. Huawei MateBook 13 levererar inte bara solid prestanda utan är även otroligt snygg med sitt premiumchassi i aluminium. Den kraftfulla Intel Core i5-processorn och 8GB LPPD3 RAM ger en smidigt användarupplevelse.",
-                    Price = 11900,
-                    ProductCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Datorer")
-
-                });
-            else
-            {
-                product.ProductCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Datorer");
             }
 
             product = dbContext.Produkter.FirstOrDefault(r => r.Name == "Lenovo 23 tum");
@@ -140,9 +146,9 @@ namespace inplup1MVC.Data
             else
             {
                 product.ProductCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Möss");
-            }
+            }          
 
-            product = dbContext.Produkter.FirstOrDefault(r => r.Name == "Laddare till Iphone");
+            product = dbContext.Produkter.FirstOrDefault(r => r.Name == "Iphone laddare");
             if (product == null)
                 dbContext.Produkter.Add(new Product
                 {
