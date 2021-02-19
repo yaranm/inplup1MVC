@@ -40,10 +40,11 @@ namespace inplup1MVC.Controllers
 
         public IActionResult Index(string q)
         {
+ 
             var viewModel = new ProductIndexViewModel();
 
             viewModel.Produkter = _dbContext.Produkter.Include(r => r.ProductCategory)
-                .Where(r => q == null || r.Name.Contains(q) || r.ProductCategory.Namn.Contains(q))
+                .Where(r => q == null || r.Name.Contains(q) || r.ProductCategory.Namn.Contains(q) /*|| r.ProductCategory.Id.Contains(q)*/ )
                 .Select(dbProd => new ProductViewModel
 
                 {
@@ -103,7 +104,8 @@ namespace inplup1MVC.Controllers
             viewModel.Comment = dbProduct.Description;
 
             viewModel.AllProductCategory = GetCategorySelectListItems();
-            
+            viewModel.IsActive = true;
+
 
             return View(viewModel);
         }

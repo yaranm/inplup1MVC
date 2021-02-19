@@ -10,5 +10,8 @@ namespace inplup1MVC.ViewModels
         public string q { get; set; }
         public List<ProductCategoryViewModel> ProductCategories { get; set; } = new List<ProductCategoryViewModel>();
 
+
+        
     }
+    
 }

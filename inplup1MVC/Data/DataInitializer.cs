@@ -22,10 +22,10 @@ namespace inplup1MVC.Data
 
         private static void SeedUsers(UserManager<IdentityUser> userManager)
         {
-            AddUserIfNotExists(userManager, "stefan@superduper.se",
+            AddUserIfNotExists(userManager, "stefan.holmberg@systementor.se",
                 "Hejsan123#", new[] {"Admin"});
 
-            AddUserIfNotExists(userManager, "kalle@superduper.se",
+            AddUserIfNotExists(userManager, "stefan.holmbergmanager@systementor.se",
                 "Hejsan123#", new[] { "ProductManager" });
 
             
@@ -52,6 +52,7 @@ namespace inplup1MVC.Data
             var role = dbContext.Roles.FirstOrDefault(r => r.Name == "Admin");
             if (role == null)
                 dbContext.Roles.Add(new IdentityRole { Name = "Admin", NormalizedName = "Admin" });
+
             role = dbContext.Roles.FirstOrDefault(r => r.Name == "ProductManager");
             if (role == null)
                 dbContext.Roles.Add(new IdentityRole { Name = "ProductManager", NormalizedName = "ProductManager" });
@@ -107,11 +108,10 @@ namespace inplup1MVC.Data
             if (product == null)
                 dbContext.Produkter.Add(new Product
                 {
-                    
+                    ProductCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Kablar"),
                     Name = "USB-C 2M",
                     Description = "USB-C i båda ändarna 2 meter ",
-                    Price = 400,
-                    ProductCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Kablar")
+                    Price = 400
 
                 });
             else
@@ -124,10 +124,10 @@ namespace inplup1MVC.Data
             if (product == null)
                 dbContext.Produkter.Add(new Product
                 {
+                    ProductCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Skärmar"),
                     Name = "Lenovo 23 tum",
                     Description = "Full HD, HDMI, USB-C",
-                    Price = 3200,
-                    ProductCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Skärmar")
+                    Price = 3200
                 });
             else
             {
@@ -138,10 +138,10 @@ namespace inplup1MVC.Data
             if (product == null)
                 dbContext.Produkter.Add(new Product
                 {
+                    ProductCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Möss"),
                     Name = "Trådlös spelmus",
                     Description = "Denna mus har ett ergonimiskt handgrepp för dig som spelar mycket.",
-                    Price = 1400,
-                    ProductCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Möss")
+                    Price = 1400
                 });
             else
             {
@@ -152,10 +152,11 @@ namespace inplup1MVC.Data
             if (product == null)
                 dbContext.Produkter.Add(new Product
                 {
+                    ProductCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Laddare"),
                     Name = "Iphone laddare",
                     Description = "Passar serie 6, 7, 8, 11",
-                    Price = 250,
-                    ProductCategory = dbContext.ProductCategories.FirstOrDefault(r => r.Namn == "Laddare")
+                    Price = 250
+                    
                 });
             else
             {

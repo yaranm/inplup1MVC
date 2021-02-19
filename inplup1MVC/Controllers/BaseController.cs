@@ -1,4 +1,5 @@
 ﻿using inplup1MVC.Data;
+using inplup1MVC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
@@ -18,8 +19,7 @@ namespace inplup1MVC.Controllers
         }
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-          
-
+           
             base.OnActionExecuting(context);
         }
     }

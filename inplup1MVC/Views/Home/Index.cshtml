@@ -60,16 +60,18 @@
                     <thead>
                         <tr>
                             <th scope="col">Namn</th>
+                            
 
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var productCategory in Model.ProductCategories)
                         {
-                            <tr>
-                                <td>@productCategory.Name</td>
+                        <tr>
+                            <td>@productCategory.Name</td>
+                            <td><a asp-controller="Product" asp-action="Index" asp-route-q="@productCategory.Name" class="btn btn-secondary active" role="button" aria-pressed="true">välj</a></td>
 
-                            </tr>
+                        </tr>
                         }
 
                     </tbody>
@@ -84,4 +86,4 @@
 
 
 </div>
-</section>
+
