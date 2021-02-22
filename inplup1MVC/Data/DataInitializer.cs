@@ -37,14 +37,15 @@ namespace inplup1MVC.Data
         {
             if (userManager.FindByEmailAsync(userName).Result != null)
                 return;
-            var identityUser = new IdentityUser
+            var user = new IdentityUser
             {
                 UserName = userName,
                 Email = userName,
                 EmailConfirmed = true
             };
-            var result = userManager.CreateAsync(identityUser, password).Result;
-            var r = userManager.AddToRolesAsync(identityUser, roles).Result;
+            var result = userManager.CreateAsync(user, password).Result;
+            var r = userManager.AddToRolesAsync(user, roles).Result;
+            //var r = userManager.AddToRolesAsync(identityUser, roles).Result;
         }
 
         private static void SeedRoles(ApplicationDbContext dbContext)
