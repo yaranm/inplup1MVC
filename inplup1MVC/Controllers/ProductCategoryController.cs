@@ -14,12 +14,15 @@ namespace inplup1MVC.Controllers
 {
     public class ProductCategoryController : BaseController
     {
+
+        
         private readonly ILogger<ProductCategoryController> _logger;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
         public ProductCategoryController(ILogger<ProductCategoryController> logger, ApplicationDbContext dbContext)
-           : base(dbContext)
+        : base(dbContext)
         {
-            _logger = logger;
+         _logger = logger;
         }
 
         public IActionResult Index(string q)
@@ -27,12 +30,12 @@ namespace inplup1MVC.Controllers
             var viewModel = new ProductCategoryIndexViewModel();
 
             viewModel.ProductCategories = _dbContext.ProductCategories
-    .Where(r => q == null || r.Namn.Contains(q))
-    .Select(_dbContext => new ProductCategoryViewModel
-    {
-        Id = _dbContext.Id,
-        Name = _dbContext.Namn
-    }).ToList();
+                 .Where(r => q == null || r.Namn.Contains(q))
+                 .Select(_dbContext => new ProductCategoryViewModel
+                 {
+                     Id = _dbContext.Id,
+                     Name = _dbContext.Namn
+                 }).ToList();
 
             return View(viewModel);
         }
@@ -42,11 +45,11 @@ namespace inplup1MVC.Controllers
         {
             var viewModel = new ProductCategoryEditViewModel();
 
-            var dbPc = _dbContext.ProductCategories.First(r => r.Id == Id);
+            var dbPc = _dbContext.ProductCategories.First(r => r.Id == Id); 
 
-            //viewModel.Id = dbPc.Id; ???????????????????????????????????????????????
+           // viewModel.Id = dbPc.Id;   --------------
             
-            viewModel.Namn = dbPc.Namn;
+            //viewModel.Namn = dbPc.Namn;   ------------  
            
 
             return View(viewModel);

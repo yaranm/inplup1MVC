@@ -10,8 +10,9 @@ namespace inplup1MVC.Data
         public static void SeedData(ApplicationDbContext dbContext, UserManager<IdentityUser> userManager)
         {
             dbContext.Database.Migrate();
-            SeedUsers(userManager);
             SeedRoles(dbContext);
+            SeedUsers(userManager);
+        
             SeedProductCategory(dbContext);
             SeedProducts(dbContext);
            
@@ -52,12 +53,14 @@ namespace inplup1MVC.Data
         {
             var role = dbContext.Roles.FirstOrDefault(r => r.Name == "Admin");
             if (role == null)
+            { 
                 dbContext.Roles.Add(new IdentityRole { Name = "Admin", NormalizedName = "Admin" });
-
+            }
             role = dbContext.Roles.FirstOrDefault(r => r.Name == "ProductManager");
             if (role == null)
+            { 
                 dbContext.Roles.Add(new IdentityRole { Name = "ProductManager", NormalizedName = "ProductManager" });
-
+            }
             dbContext.SaveChanges();
         }
 

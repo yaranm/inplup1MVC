@@ -1,6 +1,7 @@
 ﻿using inplup1MVC.Data;
 using inplup1MVC.Models;
 using inplup1MVC.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -13,25 +14,27 @@ namespace inplup1MVC.Controllers
 {
     public class HomeController : BaseController
     {
+        
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger, ApplicationDbContext dbContext)
-           : base(dbContext)
+        : base(dbContext)
         {
-            _logger = logger;
+         _logger = logger;
         }
 
         public IActionResult Index(string q)
         {
             var viewModel = new ProductCategoryIndexViewModel();
 
+            
             viewModel.ProductCategories = _dbContext.ProductCategories
-    .Where(r => q == null || r.Namn.Contains(q))
-    .Select(dbVacc => new ProductCategoryViewModel
-    {
-        Id = dbVacc.Id,
-        Name = dbVacc.Namn
-    }).ToList();
+                 .Where(r => q == null || r.Namn.Contains(q))
+                 .Select(dbVacc => new ProductCategoryViewModel
+                 {
+                      Id = dbVacc.Id,
+                      Name = dbVacc.Namn
+                 }).ToList();
 
             return View(viewModel);
         }
